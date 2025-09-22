@@ -5,7 +5,7 @@ export default function ReactBanner({ message }) {
     <>
       <div className="banner">
         <p>{message}</p>
-        <ReactButton />
+        <ReactButton customClass={'custom-class'} />
       </div>
     </>
   );
