@@ -5,7 +5,7 @@ export default function ReactBanner({ message }) {
     <>
       <div className="banner">
         <p>{message}</p>
-        <ReactButton customClass={'custom-class'} />
+        <ReactButton customClass={['gradient-button', 'solid-border']} />
       </div>
     </>
   );
