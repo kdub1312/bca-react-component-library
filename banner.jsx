@@ -5,7 +5,13 @@ export default function ReactBanner({ message }) {
     <>
       <div className="banner">
         <p>{message}</p>
-        <ReactButton customClass={['gradient-button', 'solid-border']} />
+        <ReactButton 
+          customClass={['gradient-button', 'solid-border', 'test-button-2']}
+          togglePopover={true}
+          name="button"
+          id="test-button-2"
+        >Click NOW!!
+        </ReactButton>
       </div>
     </>
   );
