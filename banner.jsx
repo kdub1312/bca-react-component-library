@@ -1,4 +1,5 @@
 import ReactButton from './button.js';
+import ReactDialog from './dialog.js';
 
 export default function ReactBanner({ message }) {
   return (
@@ -7,12 +8,18 @@ export default function ReactBanner({ message }) {
         <p>{message}</p>
         <ReactButton 
           customClass={['gradient-button', 'solid-border', 'test-button-2']}
-          togglePopover={true}
           name="button"
           id="test-button-2"
         >Click NOW!!
         </ReactButton>
       </div>
+      <ReactDialog className="react-dialog" id="dialog">
+        <>
+        <div className="close" onClick={() => document.getElementById("dialog").close()}>X</div>
+        <h2>Dialog Headline here</h2>
+        <p>This is a dialog inside the banner component.</p>
+        </>
+      </ReactDialog>
     </>
   );
 }
