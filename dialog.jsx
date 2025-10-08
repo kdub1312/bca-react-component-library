@@ -3,7 +3,7 @@ import ReactButton from "./button.js";
 
 export default function ReactDialog({ children, ...props }) {
 
-  function openDialog() {
+  function handleSelect() {
     document.getElementById("dialog").showModal();
     console.log("Dialog opened");
   }
@@ -12,9 +12,9 @@ export default function ReactDialog({ children, ...props }) {
       <dialog {...props}>{children}</dialog>
       <ReactButton 
             customClass={['dialog-button']}
+            onSelect={handleSelect}
             name="button"
             id="open-dialog-button"
-            onClick={() => openDialog()}
       >Open hi Dialog</ReactButton>
     </>
   );
