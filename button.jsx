@@ -3,18 +3,24 @@ export default function ReactButton({ customClass = [], onSelect, children, ...p
   //since we are loading the React from CDN in index.html
   const [isClicked, setIsClicked] = React.useState(false);
 
-
   function handleClick(cb) {
-    setIsClicked(!isClicked);
+    setIsClicked(true);
+
     if (onSelect) {
       onSelect();
     }
+    cb();
   }
 
 
 
   // Ensure customClass is always an array
-  const classNames = ['react-button', 'test-class', ...customClass].join(' ');
+  const classNames = [
+    'react-button', 
+    'test-class', 
+    ...customClass,
+    isClicked ? 'clicked' : ''
+  ].join(' ');
 
   return (
     <button className={classNames} onClick={handleClick} {...props}>{children}</button>
