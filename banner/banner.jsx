@@ -1,5 +1,5 @@
-import ReactButton from './button.js';
-import ReactDialog from './dialog.js';
+import ReactButton from '../button/button.jsx';
+import ReactDialog from '../dialog/dialog.jsx';
 
 export default function ReactBanner({ message }) {
   return (

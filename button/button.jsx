@@ -3,13 +3,12 @@ export default function ReactButton({ customClass = [], onSelect, children, ...p
   //since we are loading the React from CDN in index.html
   const [isClicked, setIsClicked] = React.useState(false);
 
-  function handleClick(cb) {
+  function handleClick() {
     setIsClicked(true);
 
     if (onSelect) {
       onSelect();
     }
-    cb();
   }
 
 
@@ -23,6 +22,9 @@ export default function ReactButton({ customClass = [], onSelect, children, ...p
   ].join(' ');
 
   return (
-    <button className={classNames} onClick={handleClick} {...props}>{children}</button>
+    <>
+      <button className={classNames} onClick={handleClick} {...props}>{children}</button>
+      <span className={"message"}>test message</span>
+    </>
   );
 }
