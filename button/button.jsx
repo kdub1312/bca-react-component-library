@@ -1,3 +1,5 @@
+import styles from './button.css.js';
+
 export default function ReactButton({ customClass = [], onSelect, children, ...props }) {
   //use React.useState instead of import { useState } from 'react';
   //since we are loading the React from CDN in index.html
@@ -24,7 +26,7 @@ export default function ReactButton({ customClass = [], onSelect, children, ...p
   return (
     <>
       <button className={classNames} onClick={handleClick} {...props}>{children}</button>
-      <span className={"message"}>test message</span>
+      <span className={styles.message}>test message</span>
     </>
   );
 }
