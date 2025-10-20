@@ -1,5 +1,5 @@
 // import React from 'react'; // Not needed in React 17+import React from 'react';
-import ReactButton from "../button/button.jsx";
+import ReactButton from "../button/button.js";
 
 export default function ReactDialog({ children, ...props }) {
 
