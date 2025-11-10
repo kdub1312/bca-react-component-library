@@ -15,7 +15,7 @@ export default function ReactDialog({ children, ...props }) {
             onSelect={handleSelect}
             name="button"
             id="open-dialog-button"
-      >Open the Dialog</ReactButton>
+      >Open THIS Dialog</ReactButton>
     </>
   );
 }
