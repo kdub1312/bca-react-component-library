@@ -1,4 +1,25 @@
+const { useState, useEffect } = React;
+
 export default function ReactNav({ customClass = [], items =[] }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const checkCookie = () => {
+      const loggedIn = document.cookie.split(';').some(cookie => cookie.trim().startsWith('connect.sid'));
+      setIsLoggedIn(loggedIn);
+    };
+
+    checkCookie();
+  }, []);
+
+//   function loggedInStatus() {
+//   if (typeof document === 'undefined') return false;
+//   console.log("Cookies: " + document.cookie);
+//   return document.cookie.split(';').some(cookie => cookie.trim().startsWith('connect.sid='));
+//   // console.log(document.cookie.split(';').some(cookie => cookie.trim().startsWith('connect.sid=')));
+//   // return true;
+// }
+
   return (
     <nav className={`${customClass.join(' ')}`}>
     <div className="container-fluid">
@@ -13,6 +34,16 @@ export default function ReactNav({ customClass = [], items =[] }) {
                   <a className="nav-link" href={item.link}>{item.name}</a>
                 </li>
               ))}
+              {console.log("TEST FROM nav.jsx")}
+            {isLoggedIn ? (
+              <li>
+                <a className="nav-link" href="/logout">Logout</a>
+              </li>
+            ) : (
+              <li>
+                <a className="nav-link" href="/login">Login</a>
+              </li>
+            )}
           </ul>
         <form className="d-flex">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
