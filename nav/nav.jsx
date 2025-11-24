@@ -37,12 +37,17 @@ export default function ReactNav({ customClass = [], items =[] }) {
               {console.log("TEST FROM nav.jsx")}
             {isLoggedIn ? (
               <li>
-                <a className="nav-link" href="/logout">Logout</a>
+                <a className="nav-link" href="/auth/sign-out">Sign Out</a>
               </li>
             ) : (
+              <>
               <li>
-                <a className="nav-link" href="/login">Login</a>
+                <a className="nav-link" href="/auth/sign-in">Sign In</a>
               </li>
+              <li>
+                <a className="nav-link" href="/auth/sign-up">Sign Up</a>
+              </li>
+              </>
             )}
           </ul>
         <form className="d-flex">
