@@ -5,20 +5,12 @@ export default function ReactNav({ customClass = [], items =[] }) {
 
   useEffect(() => {
     const checkCookie = () => {
-      const loggedIn = document.cookie.split(';').some(cookie => cookie.trim().startsWith('connect.sid'));
+      const loggedIn = localStorage.getItem('loggedIn') === 'true';
       setIsLoggedIn(loggedIn);
     };
 
     checkCookie();
   }, []);
-
-//   function loggedInStatus() {
-//   if (typeof document === 'undefined') return false;
-//   console.log("Cookies: " + document.cookie);
-//   return document.cookie.split(';').some(cookie => cookie.trim().startsWith('connect.sid='));
-//   // console.log(document.cookie.split(';').some(cookie => cookie.trim().startsWith('connect.sid=')));
-//   // return true;
-// }
 
   return (
     <nav className={`${customClass.join(' ')}`}>
