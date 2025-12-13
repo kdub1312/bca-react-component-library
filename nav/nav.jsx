@@ -4,12 +4,12 @@ export default function ReactNav({ customClass = [], items =[] }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const checkCookie = () => {
+    const checkStorage = () => {
       const loggedIn = localStorage.getItem('loggedIn') === 'true';
       setIsLoggedIn(loggedIn);
     };
 
-    checkCookie();
+    checkStorage();
   }, []);
 
   return (
