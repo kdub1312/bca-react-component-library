@@ -26,7 +26,7 @@ export default function ReactButton({ customClass = [], onSelect, children, ...p
   return (
     <>
       <button className={classNames} onClick={handleClick} {...props}>{children}</button>
-      <span className={styles.message}>test message</span>
+      <span className={styles.message}></span>
     </>
   );
 }

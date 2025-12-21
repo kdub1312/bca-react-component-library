@@ -11,7 +11,7 @@ export default function ReactDialog({ children, ...props }) {
     <>
       <dialog {...props}>{children}</dialog>
       <ReactButton 
-            customClass={['dialog-button']}
+            customClass={['gradient-button', 'dialog-button']}
             onSelect={handleSelect}
             name="button"
             id="open-dialog-button"
