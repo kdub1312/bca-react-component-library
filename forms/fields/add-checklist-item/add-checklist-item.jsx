@@ -1,55 +1,64 @@
-const { useState, useEffect } = React;
+const { useState } = React;
 import ReactButton from '../../../button/button.js';
 
-export default function BCAChecklistItemAdd({ onAddItem }) {
+export default function BCAChecklistItemAdd() {
   const [itemText, setItemText] = useState('');
 
-  function onAddItem() {
-
+  function onInput(e) {
+    setItemText(e.target.value)
   }
-  const handleAddClick = (e) => {
-    //alert(itemText.trim());
+
+  function checkIfEmailAddress(text) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(text);
+  }
+
+  const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (checkIfEmailAddress(itemText)) {
+      alert("Email addresses are not allowed as checklist items.");
+      return;
+    }
+
     if (itemText.trim() !== '') {
       const checklistFieldset = document.getElementById('add-checklist-fieldset');
-      //create a new label 
       const label = document.createElement('label');
-      //create a new input of type checkbox and name=items and value=itemText.trim().toLowerCase()
       const input = document.createElement('input');
+
       input.type = 'checkbox';
       input.name = 'items';
       input.value = itemText.trim().toLowerCase().replace(/\s+/g, '-');
-      //append the input as a child to the label
+
       label.appendChild(input);
-      //set the text content of the label to itemText.trim()
       label.appendChild(document.createTextNode(itemText.trim()));
-      //append the label to the checklist container with id="add-checklist-fieldset"
+
       checklistFieldset.appendChild(label);
       checklistFieldset.appendChild(document.createElement('br'));
-      //add the value of itemText.trim() as the text content of the label
-      console.log(itemText.trim());
-      onAddItem(itemText.trim());
+      
       setItemText('');
+    } else if (itemText.trim() === '') {
+      alert('Please enter a valid checklist item.');
     }
   };
 
   return (
-    <div className="checklist-item-add">
+    <form onSubmit={handleSubmit} className="checklist-item-add">
       <input
         type="text"
         value={itemText}
-        onChange={(e) => setItemText(e.target.value)}
+        onChange={onInput}
         placeholder="New checklist item"
         aria-label="New checklist item"
+        required
       />
       <ReactButton
         customClass={['add-item-button']}
         name="add-item"
         id="add-item-button"
-        onClick={handleAddClick}
       >
         Add Item
       </ReactButton>
-    </div>
+    </form>
   );
 }   

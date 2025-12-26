@@ -26,7 +26,6 @@ export default function ReactNav({ customClass = [], items =[] }) {
                   <a className="nav-link" href={item.link}>{item.name}</a>
                 </li>
               ))}
-              {console.log("TEST FROM nav.jsx")}
             {isLoggedIn ? (
               <li>
                 <a className="nav-link" href="/auth/sign-out">Sign Out</a>
