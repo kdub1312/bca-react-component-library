@@ -8,18 +8,35 @@ export default function BCAChecklistItemAdd() {
     setItemText(e.target.value)
   }
 
-  function checkIfEmailAddress(text) {
+  function validateNewItem(text) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(text);
+    const numbersRegex = /^\d+$/;
+    const maxRegex = /^.{0,64}$/;
+
+    if (emailRegex.test(text)) {
+        alert("Email addresses are not allowed as checklist items.");
+        return true;
+    } else if (numbersRegex.test(text)) {
+      alert("Item cannot be only numbers.");
+      return true;
+    } else if (text.trim() === '') {
+      alert('Please enter a valid checklist item.');
+      return true;
+    } else if (!maxRegex.test(text)) {
+      alert('Cannot be more than 64 characters');
+      return true;
+    }
+    
+    return;
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (checkIfEmailAddress(itemText)) {
-      alert("Email addresses are not allowed as checklist items.");
+    if (validateNewItem(itemText)) {
       return;
     }
+    
 
     if (itemText.trim() !== '') {
       const checklistFieldset = document.getElementById('add-checklist-fieldset');
@@ -37,8 +54,6 @@ export default function BCAChecklistItemAdd() {
       checklistFieldset.appendChild(document.createElement('br'));
       
       setItemText('');
-    } else if (itemText.trim() === '') {
-      alert('Please enter a valid checklist item.');
     }
   };
 
@@ -50,7 +65,6 @@ export default function BCAChecklistItemAdd() {
         onChange={onInput}
         placeholder="New checklist item"
         aria-label="New checklist item"
-        required
       />
       <ReactButton
         customClass={['add-item-button']}
