@@ -1,11 +1,16 @@
 const { useState } = React;
 import ReactButton from '../../../button/button.js';
+// import styles from './add-checklist-item.css.js';
 
 export default function BCAChecklistItemAdd() {
   const [itemText, setItemText] = useState('');
+  const [error, setError] = useState('');
 
   function onInput(e) {
     setItemText(e.target.value)
+
+    //clear error when user types
+    if (error) setError('');
   }
 
   function validateNewItem(text) {
@@ -14,16 +19,20 @@ export default function BCAChecklistItemAdd() {
     const maxRegex = /^.{0,64}$/;
 
     if (emailRegex.test(text)) {
-        alert("Email addresses are not allowed as checklist items.");
+        //alert("Email addresses are not allowed as checklist items.");
+        setError("Email addresses are not allowed as checklist items.");
         return true;
     } else if (numbersRegex.test(text)) {
-      alert("Item cannot be only numbers.");
+      //alert("Item cannot be only numbers.");
+      setError("Item cannot be only numbers.");
       return true;
     } else if (text.trim() === '') {
-      alert('Please enter a valid checklist item.');
+      //alert('Please enter a valid checklist item.');
+      setError("Please enter a valid checklist item.");
       return true;
     } else if (!maxRegex.test(text)) {
-      alert('Cannot be more than 64 characters');
+      //alert('Cannot be more than 64 characters');
+      setError("Cannot be more than 64 characters");
       return true;
     }
     
@@ -54,6 +63,7 @@ export default function BCAChecklistItemAdd() {
       checklistFieldset.appendChild(document.createElement('br'));
       
       setItemText('');
+      setError('');
     }
   };
 
@@ -65,6 +75,7 @@ export default function BCAChecklistItemAdd() {
         onChange={onInput}
         placeholder="New checklist item"
         aria-label="New checklist item"
+        className={error ? 'error' : ''}
       />
       <ReactButton
         customClass={['add-item-button']}
@@ -73,6 +84,7 @@ export default function BCAChecklistItemAdd() {
       >
         Add Item
       </ReactButton>
+      {error && <div>{error}</div>}
     </form>
   );
 }   
