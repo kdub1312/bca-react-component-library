@@ -1,6 +1,5 @@
 const { useState } = React;
 import ReactButton from '../../../button/button.js';
-// import styles from './add-checklist-item.css.js';
 
 export default function BCAChecklistItemAdd() {
   const [itemText, setItemText] = useState('');
@@ -84,7 +83,7 @@ export default function BCAChecklistItemAdd() {
       >
         Add Item
       </ReactButton>
-      {error && <div>{error}</div>}
+      {error && <div className='error'>{error}</div>}
     </form>
   );
 }   
