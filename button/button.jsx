@@ -23,7 +23,6 @@ export default function ReactButton({ customClass = [], onSelect, children, ...p
     <>
       <button className={classNames} onClick={handleClick} {...props}>{children}</button>
       <span className="test"></span>
-      <span>gooday mighty world</span>
     </>
   );
 }
