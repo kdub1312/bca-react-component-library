@@ -1,4 +1,5 @@
 import ReactButton from '../button/button.js';
+ import { handleDelete, handleActivate } from '/js/components/button-actions.js';
 
 export default function ReactChecklistList({ customClass, checklists, children }) {
     return checklists.map((checklist) => {
@@ -23,6 +24,7 @@ export default function ReactChecklistList({ customClass, checklists, children }
                     name="button"
                     id={`delete-btn-${checklist.id}`}
                     data-checklist-id={checklist.id}
+                    onClick={() => handleDelete(checklist.id)}
                 >Delete
                 </ReactButton>
                 <ReactButton 
@@ -30,7 +32,7 @@ export default function ReactChecklistList({ customClass, checklists, children }
                     name="button"
                     id={`activate-btn-${checklist.id}`}
                     data-checklist-id={checklist.id}
-                >Activate
+                    onClick={() => handleActivate(checklist.id)}>Activate
                 </ReactButton>
             </div>
         );
