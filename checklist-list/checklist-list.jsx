@@ -2,6 +2,13 @@ import ReactButton from '../button/button.js';
  import { handleDelete, handleActivate } from '/js/components/button-actions.js';
 
 export default function ReactChecklistList({ customClass, checklists, children }) {
+    const [isHidden, setIsHidden] = React.useState(false);
+
+    const toggleHidden = (checklistId) => {
+        setIsHidden(!isHidden);
+        handleDelete(checklistId);
+    };
+
     return checklists.map((checklist) => {
         // Ensure items is an array
         const items = Array.isArray(checklist.items) 
@@ -9,7 +16,7 @@ export default function ReactChecklistList({ customClass, checklists, children }
             : (typeof checklist.items === 'string' ? JSON.parse(checklist.items) : []);
         
         return (
-            <div key={checklist.id} className="checklist-row items">
+            <div key={checklist.id} className={`${isHidden ? 'hidden' : ''} checklist-row items`}>
                 <h3>{checklist.title}</h3>
                 <p>{checklist.description}</p>
                 {/* loop through checklist items here */}
@@ -24,7 +31,7 @@ export default function ReactChecklistList({ customClass, checklists, children }
                     name="button"
                     id={`delete-btn-${checklist.id}`}
                     data-checklist-id={checklist.id}
-                    onClick={() => handleDelete(checklist.id)}
+                    onClick={() => toggleHidden(checklist.id)}
                 >Delete
                 </ReactButton>
                 <ReactButton 
