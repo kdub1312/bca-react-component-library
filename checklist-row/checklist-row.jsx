@@ -9,6 +9,10 @@ export default function ReactChecklistRow({ items, checklist }) {
         handleDelete(checklistId);
     };
 
+    const toggleEditing = (checklistId) => {
+        alert("checklistId: " + checklistId + " edit functionality coming soon!");
+    };
+
       return (
           <div key={checklist.id} className={`${isHidden ? 'hidden' : ''} checklist-row items`}>
               <h3>{checklist.title}</h3>
@@ -34,6 +38,13 @@ export default function ReactChecklistRow({ items, checklist }) {
                   id={`activate-btn-${checklist.id}`}
                   data-checklist-id={checklist.id}
                   onClick={() => handleActivate(checklist.id)}>Activate
+              </ReactButton>
+              <ReactButton 
+                  customClass={['react-button test-class btn btn-danger']}
+                  name="button"
+                  id={`activate-btn-${checklist.id}`}
+                  data-checklist-id={checklist.id}
+                  onClick={() => toggleEditing(checklist.id)}>Edit
               </ReactButton>
           </div>
       );
