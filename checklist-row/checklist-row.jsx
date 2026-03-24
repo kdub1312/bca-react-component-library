@@ -1,8 +1,11 @@
+// TODO: Convert the checklist to its own component and conditionally render either that component or the future editView component based on editing state.
 import ReactButton from '../button/button.js';
-import { handleDelete, handleActivate } from '/js/components/button-actions.js';
+import { handleDelete, handleActivate, handleEdit } from '/js/components/button-actions.js';
+import ReactChecklistList from '../checklist-list/checklist-list.js';
 
 export default function ReactChecklistRow({ items, checklist }) {
     const [isHidden, setIsHidden] = React.useState(false);
+    const [isEditing, setIsEditing] = React.useState(false);
 
     const toggleHidden = (checklistId) => {
         setIsHidden(!isHidden);
@@ -10,7 +13,8 @@ export default function ReactChecklistRow({ items, checklist }) {
     };
 
     const toggleEditing = (checklistId) => {
-        alert("checklistId: " + checklistId + " edit functionality coming soon!");
+        setIsEditing(!isEditing);
+        // handleEdit();
     };
 
       return (
@@ -18,12 +22,16 @@ export default function ReactChecklistRow({ items, checklist }) {
               <h3>{checklist.title}</h3>
               <p>{checklist.description}</p>
               {/* loop through checklist items here */}
-              <ul className="item list-group">
+              {/* <ul className="item list-group">
                   
                   {items.map((item, index) => (
                       <li key={index} className="list-group-item">{item}</li>
                   ))}
-              </ul>
+              </ul> */}
+                <ReactChecklistList items={items}>
+                </ReactChecklistList>
+
+              <div class="checklist-add-target"></div>
               <ReactButton 
                   customClass={['react-button test-class btn btn-danger']}
                   name="button"
@@ -40,7 +48,7 @@ export default function ReactChecklistRow({ items, checklist }) {
                   onClick={() => handleActivate(checklist.id)}>Activate
               </ReactButton>
               <ReactButton 
-                  customClass={['react-button test-class btn btn-danger']}
+                  customClass={['react-button btn btn-danger btn-outline-light']}
                   name="button"
                   id={`activate-btn-${checklist.id}`}
                   data-checklist-id={checklist.id}
