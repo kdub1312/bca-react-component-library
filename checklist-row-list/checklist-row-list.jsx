@@ -1,6 +1,6 @@
 import ReactChecklistRow from '../checklist-row/checklist-row.js';
 
-export default function ReactChecklistRowsList({ customClass, checklists, children }) {
+export default function ReactChecklistRowsList({ checklists }) {
 
     return checklists.map((checklist) => {
         // Ensure items is an array

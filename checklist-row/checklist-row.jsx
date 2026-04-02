@@ -2,36 +2,54 @@
 import ReactButton from '../button/button.js';
 import { handleDelete, handleActivate, handleEdit } from '/js/components/button-actions.js';
 import ReactChecklistList from '../checklist-list/checklist-list.js';
+import ReactChecklistEdit from '../checklist-edit/checklist-edit.js';
+const { createRoot } = ReactDOM;
+import BCAChecklistItemAdd from "../forms/fields/add-checklist-item/add-checklist-item.js";
 
 export default function ReactChecklistRow({ items, checklist }) {
     const [isHidden, setIsHidden] = React.useState(false);
     const [isEditing, setIsEditing] = React.useState(false);
 
+    function loadChecklistItemAdd() {
+      if (!document.getElementById("bca-checklist-item-add")) {
+        return;
+      }
+      const checklistItemAddRoot = createRoot(document.getElementById("bca-checklist-item-add"));
+    
+      checklistItemAddRoot.render(
+        React.createElement(BCAChecklistItemAdd)
+      );
+    }
+
     const toggleHidden = (checklistId) => {
         setIsHidden(!isHidden);
+        
         handleDelete(checklistId);
     };
 
+    React.useEffect(() => {
+        if (isEditing) {
+            // This runs after isEditing is true AND the view has updated
+            loadChecklistItemAdd();
+        }
+    }, [isEditing]);
+
     const toggleEditing = (checklistId) => {
         setIsEditing(!isEditing);
-        // handleEdit();
     };
 
       return (
           <div key={checklist.id} className={`${isHidden ? 'hidden' : ''} checklist-row items`}>
               <h3>{checklist.title}</h3>
               <p>{checklist.description}</p>
-              {/* loop through checklist items here */}
-              {/* <ul className="item list-group">
-                  
-                  {items.map((item, index) => (
-                      <li key={index} className="list-group-item">{item}</li>
-                  ))}
-              </ul> */}
-                <ReactChecklistList items={items}>
-                </ReactChecklistList>
-
-              <div class="checklist-add-target"></div>
+                {!isEditing ? (
+                    <ReactChecklistList items={items} />
+                ) : (
+                    <>
+                    <ReactChecklistEdit items={items} checklist={checklist} />
+                    </>
+                )}
+              <div className="checklist-add-target"></div>
               <ReactButton 
                   customClass={['react-button test-class btn btn-danger']}
                   name="button"
