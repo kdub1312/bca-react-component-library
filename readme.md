@@ -150,7 +150,7 @@ A component that renders a list of checklists using ChecklistRow components.
 **Usage:**
 
 ```jsx
-import ReactChecklistList from "./checklist-list/checklist-list.js";
+import ReactChecklistRowList from "./checklist-list/checklist-list.js";
 
 const checklists = [
   {
@@ -161,7 +161,7 @@ const checklists = [
   },
 ];
 
-<ReactChecklistList checklists={checklists} />;
+<ReactChecklistRowList checklists={checklists} />;
 ```
 
 ### Checklist Row

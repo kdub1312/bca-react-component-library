@@ -1,15 +1,8 @@
-import ReactChecklistRow from '../checklist-row/checklist-row.js';
+export default function ReactChecklistList({ items }) {
 
-export default function ReactChecklistList({ customClass, checklists, children }) {
-
-    return checklists.map((checklist) => {
-        // Ensure items is an array
-        const items = Array.isArray(checklist.items) 
-            ? checklist.items 
-            : (typeof checklist.items === 'string' ? JSON.parse(checklist.items) : []);
-        
-        return (
-                <ReactChecklistRow items={items} checklist={checklist} key={checklist.id} />
-        );
-    });
+    return <ul className="item list-group">
+            {items.map((item, index) => (
+                        <li key={index} className="list-group-item">{item}</li>
+                    ))}
+            </ul>
 }
