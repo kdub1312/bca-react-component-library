@@ -47,7 +47,7 @@ export default function BCAChecklistItemAdd() {
     
 
     if (itemText.trim() !== '') {
-      const checklistFieldset = document.getElementById('add-checklist-fieldset');
+      const checklistFieldset = document.getElementById('bca-checklist-item-add-dropzone');
       const label = document.createElement('label');
       const input = document.createElement('input');
 
