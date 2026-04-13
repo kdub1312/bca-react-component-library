@@ -14,7 +14,7 @@ export default function ReactChecklistEdit({ items, checklist, children }) {
                 items.map((item, index) => (
                 <div key={index}>
                         <label>
-                        <input type="checkbox" name="items" value={item}/>{item}
+                        <input type="checkbox" name="items" value={item} checked/>{item}
                         </label>
                         <br />
                 </div>
