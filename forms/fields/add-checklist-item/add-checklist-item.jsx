@@ -53,7 +53,7 @@ export default function BCAChecklistItemAdd() {
 
       input.type = 'checkbox';
       input.name = 'items';
-      input.value = itemText.trim().toLowerCase().replace(/\s+/g, '-');
+      input.value = itemText.trim().toLowerCase();
       input.checked = true;
 
       label.appendChild(input);
