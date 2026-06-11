@@ -11,10 +11,10 @@ export default function ReactChecklistEdit({ items, checklist, children }) {
             <input type="hidden" name="id" value={checklist.id}></input>
             <div id="bca-checklist-item-add-dropzone">
             {items && items.length > 0 ? (
-                items.map((item, index) => (
+                items.filter(single => single && typeof single === 'object').map((single, index) => (
                 <div key={index}>
                         <label>
-                        <input type="checkbox" name="items" value={item} checked/>{item}
+                        <input type="checkbox" name="items" value={single.item} checked/>{single.item}
                         </label>
                         <br />
                 </div>
