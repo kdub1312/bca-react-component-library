@@ -39,39 +39,53 @@ export default function ReactChecklistRow({ items, checklist }) {
     };
 
       return (
-          <div key={checklist.id} className={`${isHidden ? 'hidden' : ''} checklist-row items`}>
-              <h3>{checklist.title}</h3>
-              <p>{checklist.description}</p>
-                {!isEditing ? (
-                    <ReactChecklistList items={items} />
-                ) : (
-                    <>
-                    <ReactChecklistEdit items={items} checklist={checklist} />
-                    </>
-                )}
-              <div className="checklist-add-target"></div>
-              <ReactButton 
-                  customClass={['react-button test-class btn btn-danger']}
-                  name="button"
-                  id={`delete-btn-${checklist.id}`}
-                  data-checklist-id={checklist.id}
-                  onClick={() => toggleHidden(checklist.id)}
-              >Delete
-              </ReactButton>
-              <ReactButton 
-                  customClass={['react-button test-class btn btn-danger']}
-                  name="button"
-                  id={`activate-btn-${checklist.id}`}
-                  data-checklist-id={checklist.id}
-                  onClick={() => handleActivate(checklist.id)}>Activate
-              </ReactButton>
-              <ReactButton 
-                  customClass={['react-button btn btn-danger btn-outline-light']}
-                  name="button"
-                  id={`activate-btn-${checklist.id}`}
-                  data-checklist-id={checklist.id}
-                  onClick={() => toggleEditing(checklist.id)}>Edit
-              </ReactButton>
+          <div key={checklist.id} className={`${isHidden ? 'hidden' : ''} accordion-item`}>
+              <h2 className="accordion-header">
+                  <button
+                      className="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target={`#checklist-collapse-${checklist.id}`}
+                      aria-expanded="false"
+                      aria-controls={`checklist-collapse-${checklist.id}`}
+                  >{checklist.title}
+                  </button>
+              </h2>
+              <div id={`checklist-collapse-${checklist.id}`} className="accordion-collapse collapse">
+                  <div className="accordion-body">
+                      <p>{checklist.description}</p>
+                      {!isEditing ? (
+                          <ReactChecklistList items={items} />
+                      ) : (
+                          <>
+                          <ReactChecklistEdit items={items} checklist={checklist} />
+                          </>
+                      )}
+                      <div className="checklist-add-target"></div>
+                      <ReactButton
+                          customClass={['btn btn-outline-danger']}
+                          name="button"
+                          id={`delete-btn-${checklist.id}`}
+                          data-checklist-id={checklist.id}
+                          onClick={() => toggleHidden(checklist.id)}
+                      >Delete
+                      </ReactButton>
+                      <ReactButton
+                          customClass={['btn btn-outline-success']}
+                          name="button"
+                          id={`activate-btn-${checklist.id}`}
+                          data-checklist-id={checklist.id}
+                          onClick={() => handleActivate(checklist.id)}>Activate
+                      </ReactButton>
+                      <ReactButton
+                          customClass={['btn btn-outline-primary']}
+                          name="button"
+                          id={`edit-btn-${checklist.id}`}
+                          data-checklist-id={checklist.id}
+                          onClick={() => toggleEditing(checklist.id)}>Edit
+                      </ReactButton>
+                  </div>
+              </div>
           </div>
       );
 }
