@@ -1,4 +1,3 @@
-// TODO: Convert the checklist to its own component and conditionally render either that component or the future editView component based on editing state.
 import ReactButton from '../button/button.js';
 import { handleDelete, handleActivate, handleEdit } from '/js/components/button-actions.js';
 import ReactChecklistList from '../checklist-list/checklist-list.js';

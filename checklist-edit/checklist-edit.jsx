@@ -1,5 +1,5 @@
 import BCAChecklistItemAdd from "../forms/fields/add-checklist-item/add-checklist-item.js";
-import BCARemoveEditChecklistItem from "../checklist-item-edit/checklist-item-edit.js";
+import BCARemoveEditChecklistItem, { BCAModifyEditChecklistItem } from "../checklist-item-edit/checklist-item-edit.js";
 
 export default function ReactChecklistEdit({ items, checklist, children }) {
 
@@ -13,7 +13,9 @@ export default function ReactChecklistEdit({ items, checklist, children }) {
             <div id="bca-checklist-item-add-dropzone">
             {items && items.length > 0 ? (
                 items.filter(single => single && typeof single === 'object').map((single, index) => (
-                <BCARemoveEditChecklistItem key={index} single={single} index={index} />
+                <>
+                    <BCARemoveEditChecklistItem key={index} single={single} index={index} />
+                </>
                 ))      
             ) : (
                 <p>No items in this checklist yet.</p>
