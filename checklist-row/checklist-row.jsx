@@ -5,7 +5,8 @@ import ReactChecklistEdit from '../checklist-edit/checklist-edit.js';
 const { createRoot } = ReactDOM;
 import BCAChecklistItemAdd from "../forms/fields/add-checklist-item/add-checklist-item.js";
 
-export default function ReactChecklistRow({ items, checklist }) {
+export default function ReactChecklistRow({ items: initialItems, checklist }) {
+    const [items, setItems] = React.useState(initialItems);
     const [isHidden, setIsHidden] = React.useState(false);
     const [isEditing, setIsEditing] = React.useState(false);
 
@@ -57,7 +58,7 @@ export default function ReactChecklistRow({ items, checklist }) {
                           <ReactChecklistList items={items} />
                       ) : (
                           <>
-                          <ReactChecklistEdit items={items} checklist={checklist} />
+                          <ReactChecklistEdit items={items} checklist={checklist} onUpdated={setItems} />
                           </>
                       )}
                       <div className="checklist-add-target"></div>
